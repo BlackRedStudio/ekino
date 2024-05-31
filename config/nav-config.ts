@@ -4,6 +4,7 @@ type TNavConfig = {
     label: string;
     slug: string;
     icon: keyof typeof Icons;
+    layoutSegment?: string;
 }[]
 
 export const navConfig: TNavConfig = [
@@ -15,11 +16,13 @@ export const navConfig: TNavConfig = [
     {
         label: 'Filmy i seriale',
         slug: '/szukaj',
-        icon: 'camera'
+        icon: 'camera',
+        layoutSegment: 'filmy-i-seriale'
     },
     {
         label: 'Blog',
         slug: '/blog',
-        icon: 'bookOpen'
+        icon: 'bookOpen',
+        layoutSegment: 'blog'
     },
 ]
