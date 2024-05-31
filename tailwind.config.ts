@@ -19,6 +19,13 @@ const config = {
           "2xl": "1200px",
         },
       },
+      screens: {
+        xl: '1200px',
+        // jakby ktoś chciał do max-width: 1199px
+        // toXl: {
+        //   max: '1199px'
+        // }
+      },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },

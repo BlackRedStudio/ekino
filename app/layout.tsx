@@ -3,6 +3,7 @@ import { Inter } from 'next/font/google';
 
 import './globals.css';
 import { cn } from "@/utils/lib/tailwind";
+import Header from "@/components/layout/header";
 
 const inter = Inter({ subsets: ['latin'], variable: "--font-sans", });
 
@@ -19,9 +20,10 @@ export default function RootLayout({
 	return (
 		<html lang="pl">
 			<body className={cn(
-				'min-h-screen bg-background font-sans antialiased',
+				'min-h-screen bg-foreground font-sans antialiased',
 				inter.variable
 			)}>
+				<Header />
 				<main>
 				{children}
 				</main>
