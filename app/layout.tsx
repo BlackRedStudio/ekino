@@ -20,7 +20,7 @@ export default function RootLayout({
 	return (
 		<html lang="pl">
 			<body className={cn(
-				'min-h-screen bg-foreground font-sans antialiased',
+				'min-h-screen bg-foreground font-sans antialiased [&_section]:text-white [&_section]:h-[2000px]',
 				inter.variable
 			)}>
 				<Header />

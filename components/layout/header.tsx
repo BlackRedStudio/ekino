@@ -3,6 +3,9 @@ import Link from "next/link";
 import Menu from "./menu";
 
 export default function Header() {
+
+    let date = new Date();
+
     return (
         <>
             <header className="fixed top-0 z-50 w-full bg-foreground py-3">
@@ -20,6 +23,7 @@ export default function Header() {
                 </div>
             </header>
             <div className="h-[129px] xl:h-[77px]" />
+            <div className="text-white text-2xl">{date.toTimeString()}</div>
         </>
     )
 }
