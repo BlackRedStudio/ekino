@@ -8,7 +8,7 @@ type TProps = {
 
 export async function generateMetadata({params}: TProps): Promise<Metadata> {
     return {
-        title: `Szukaj: ${params.slug}`
+        title: !params.slug ? `Szukaj filmu lub serialu` : `Szukaj: ${params.slug}`
     }
 }
 
