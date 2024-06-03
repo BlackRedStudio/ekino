@@ -35,7 +35,7 @@ export default function RootLayout({
 		<html lang="pl">
 			<body
 				className={cn(
-					'min-h-screen bg-foreground font-poppins antialiased',
+					'font-poppins min-h-screen bg-foreground antialiased',
 					poppins.variable,
 				)}>
 				<Header />

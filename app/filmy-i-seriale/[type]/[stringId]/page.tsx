@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { redirect } from "next/navigation";
 
 type TProps = {
     params: {
@@ -16,6 +17,11 @@ export async function generateMetadata({params}: TProps): Promise<Metadata> {
 export default function MoviesTVPage({params: {
     stringId, type
 }}: TProps) {
+
+    if((type !== 'filmy' && type !== 'seriale')) {
+        redirect('/szukaj');
+    }
+
     return (
         <article>
             <section>
