@@ -1,5 +1,9 @@
 import { ReactNode } from "react"
 
+export const metadata = {
+    title: 'Moje konto'
+}
+
 type TProps = {
     children: ReactNode
 }

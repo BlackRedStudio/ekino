@@ -1,6 +1,14 @@
+import { Metadata } from "next"
+
 type TProps = {
     params: {
         slug?: string[]
+    }
+}
+
+export async function generateMetadata({params}: TProps): Promise<Metadata> {
+    return {
+        title: `Szukaj: ${params.slug}`
     }
 }
 
