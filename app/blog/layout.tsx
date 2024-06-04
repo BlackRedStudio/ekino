@@ -1,17 +1,17 @@
-import { ReactNode } from "react"
+import { ReactNode } from 'react';
 
 type TProps = {
-    children: ReactNode
-}
+	children: ReactNode;
+};
 
 export const metadata = {
-    title: 'Blog'
-}
+	title: 'Blog',
+};
 
-export default function BlogLayout({children}: TProps) {
-    return (
-        <article className="prose prose-invert xl:prose-xl">
-            {children}
-        </article>
-    )
+export default function BlogLayout({ children }: TProps) {
+	return (
+		<article className="prose prose-invert xl:prose-xl mx-auto">
+			{children}
+		</article>
+	);
 }
