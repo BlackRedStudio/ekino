@@ -10,8 +10,8 @@ export const metadata = {
 
 export default function BlogLayout({children}: TProps) {
     return (
-        <>
+        <article className="prose prose-invert xl:prose-xl">
             {children}
-        </>
+        </article>
     )
 }
