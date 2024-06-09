@@ -216,7 +216,7 @@ const CarouselPrevious = React.forwardRef<
 			disabled={!canScrollPrev}
 			onClick={scrollPrev}
 			{...props}>
-			<Icons.chevronLeft className="h-4 w-4" />
+			<Icons.chevronLeft className="size-6" />
 			<span className="sr-only">Previous slide</span>
 		</Button>
 	);
@@ -244,7 +244,7 @@ const CarouselNext = React.forwardRef<
 			disabled={!canScrollNext}
 			onClick={scrollNext}
 			{...props}>
-			<Icons.chevronRight className="h-4 w-4" />
+			<Icons.chevronRight className="size-6" />
 			<span className="sr-only">Next slide</span>
 		</Button>
 	);
@@ -252,14 +252,15 @@ const CarouselNext = React.forwardRef<
 CarouselNext.displayName = 'CarouselNext';
 
 type TDotButton = {
-	children: React.ReactNode;
+	children?: React.ReactNode;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 export const DotButton = ({ children, ...props }: TDotButton) => {
 	return (
 		<button
+			{...props}
 			className={cn('size-3 rounded-full', props.className)}
-			{...props}>
+			>
 			{children}
 		</button>
 	);
@@ -267,6 +268,7 @@ export const DotButton = ({ children, ...props }: TDotButton) => {
 
 export {
 	type CarouselApi,
+	useCarousel,
 	Carousel,
 	CarouselContent,
 	CarouselItem,

@@ -1,12 +1,7 @@
 import TMDB from '@/types/tmdb-types';
 
 import { api } from '../helpers/api-helper';
-
-const TMDBApiURL = 'https://api.themoviedb.org/3';
-const TMDBHeaders = {
-    Authorization: `Bearer ${process.env.MOVIE_DB_TOKEN}`,
-    Accept: 'application/json'
-};
+import { TMDBApiURL, TMDBHeaders } from "@/config/tmdb-config";
 
 const TMDBService = {
 	// https://developer.themoviedb.org/reference/trending-movies

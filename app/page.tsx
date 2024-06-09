@@ -1,3 +1,4 @@
+import MovieCarousel from "@/components/movie-carousel/movie-carousel";
 import TMDBService from "@/server/services/tmdb-service";
 
 export default async function HomePage() {
@@ -7,6 +8,6 @@ export default async function HomePage() {
 	console.log(trendingMovies);
 
 	return <article>
-		<section>Homepage</section>
+		<section>{trendingMovies ? <MovieCarousel movies={trendingMovies} /> : ''}</section>
 	</article>;
 }
