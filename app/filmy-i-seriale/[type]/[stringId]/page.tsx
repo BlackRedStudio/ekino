@@ -1,3 +1,4 @@
+import Gallery from "@/components/gallery/gallery";
 import MediaBG from "@/components/media-bg";
 import Heading from "@/components/ui/heading";
 import Section from "@/components/ui/section";
@@ -63,6 +64,9 @@ export default async function MoviesTVPage({params: {
                     {media.overview}
                 </div>
             </Section>
+            {images?.backdrops ? <Section>
+                <Gallery images={images.backdrops} />
+            </Section> : ''}
         </article>
     )
 }
