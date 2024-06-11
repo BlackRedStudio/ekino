@@ -30,6 +30,10 @@ export async function api<TRes, TReq>(
 
         const data = await response.json();
 
+        if('status_message' in data) {
+            throw new Error(data.status_message);
+        }
+
         return data;
     } catch (error) {
         console.log(error);

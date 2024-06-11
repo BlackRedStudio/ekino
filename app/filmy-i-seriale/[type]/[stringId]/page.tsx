@@ -1,5 +1,6 @@
+import TMDBService from "@/server/services/tmdb-service";
 import { Metadata } from "next";
-import { redirect } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 type TProps = {
     params: {
@@ -14,13 +15,26 @@ export async function generateMetadata({params}: TProps): Promise<Metadata> {
     }
 }
 
-export default function MoviesTVPage({params: {
+export default async function MoviesTVPage({params: {
     stringId, type
 }}: TProps) {
 
     if((type !== 'filmy' && type !== 'seriale')) {
         redirect('/szukaj');
     }
+
+    const mediaType = type === 'filmy' ? 'movie' : 'tv';
+    const id = parseInt(stringId);
+    
+    const [media, images] = await Promise.all([
+        mediaType === 'movie' ? TMDBService.getMovieDetails(id) : TMDBService.getTVDetails(id),
+        mediaType === 'movie' ? TMDBService.getMovieImages(id) : TMDBService.getTVImages(id),
+    ]);
+
+    if(!media) notFound();
+
+    console.log(media);
+    console.log(images);
 
     return (
         <article>
