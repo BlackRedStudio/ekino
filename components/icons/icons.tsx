@@ -3,6 +3,7 @@ import { BookOpenIcon, ChevronLeftIcon, ChevronRightIcon, MenuIcon } from 'lucid
 import Camera from './camera';
 import Home from './home';
 import TriangleDown from "./triangle-down";
+import ArrowDown from "./arrow-down";
 
 export const Icons = {
 	home: Home,
@@ -12,4 +13,5 @@ export const Icons = {
 	triangleDown: TriangleDown,
 	chevronLeft: ChevronLeftIcon,
 	chevronRight: ChevronRightIcon,
+	arrowDown: ArrowDown,
 };

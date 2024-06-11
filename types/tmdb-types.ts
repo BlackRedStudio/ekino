@@ -68,7 +68,7 @@ namespace TMDB {
 		vote_count: number;
 	};
 
-	type TCast = {
+	export type TCast = {
 		adult: boolean,
 		gender: number,
 		id: number,
