@@ -35,6 +35,7 @@ const config = {
 				ring: 'var(--ring)',
 				background: 'var(--background)',
 				foreground: 'var(--foreground)',
+				dark: 'var(--dark)',
 				green: 'var(--green)',
 				silver: 'var(--silver)',
 				primary: {

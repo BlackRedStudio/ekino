@@ -40,9 +40,6 @@ export default async function MoviesTVPage({params: {
 
     if(!media) notFound();
 
-    console.log(media);
-    console.log(images);
-
     return (
         <article>
             <section>
