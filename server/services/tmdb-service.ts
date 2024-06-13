@@ -134,6 +134,46 @@ const TMDBService = {
 
 		return data;
 	},
+	// https://developer.themoviedb.org/reference/search-movie
+	async searchMovie(query: string) {
+		const data = await api<
+			TMDB.TRes<TMDB.TMovie[]>,
+			TMDB.TSearchMovieReq
+		>(`${TMDBApiURL}/search/movie`, {
+			headers: TMDBHeaders,
+			params: {
+				query,
+				language: 'pl',
+			},
+			options: {
+				next: {
+					revalidate: 3600,
+				},
+			},
+		});
+
+		return data;
+	},
+	// https://developer.themoviedb.org/reference/search-tv
+	async searchTV(query: string) {
+		const data = await api<
+			TMDB.TRes<TMDB.TTV[]>,
+			TMDB.TSearchTVReq
+		>(`${TMDBApiURL}/search/tv`, {
+			headers: TMDBHeaders,
+			params: {
+				query,
+				language: 'pl',
+			},
+			options: {
+				next: {
+					revalidate: 3600,
+				},
+			},
+		});
+
+		return data;
+	},
 };
 
 export default TMDBService;

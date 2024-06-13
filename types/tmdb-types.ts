@@ -219,6 +219,23 @@ namespace TMDB {
 		season_number: number;
 		vote_average: number;
 	};
+	export type TSearchMovieReq = {
+		query: string;
+		include_adult?: boolean;
+		language?: string;
+		primary_release_date?: string;
+		page?: number;
+		region?: string;
+		year?: string;
+	}
+	export type TSearchTVReq = {
+		query: string;
+		include_adult?: boolean;
+		language?: string;
+		first_air_date?: string;
+		page?: number;
+		year?: string;
+	}
 }
 
 export default TMDB;
