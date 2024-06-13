@@ -1,4 +1,5 @@
 import MediaGrid from "@/components/media-grid/media-grid"
+import Search from "@/components/search/search"
 import Heading from "@/components/ui/heading"
 import Section from "@/components/ui/section"
 import { Separator } from "@/components/ui/separator"
@@ -63,6 +64,9 @@ export default async function SearchPage({params, searchParams}: TProps) {
 
     return (
         <article>
+            <Section>
+                <Search />
+            </Section>
             <Section>
                 {mediaHeading}
                 <Separator className="mb-7" />

@@ -18,7 +18,7 @@ export default function Breadcrumb() {
         pathLink += path + '/';
 
         return {
-            label: path.replace(/-/g, ' '),
+            label: decodeURI(path.replace(/-/g, ' ')),
             value: pathLink
         }
     });
