@@ -96,10 +96,20 @@ namespace TMDB {
 		backdrop_path: string;
 	};
 
-	type TGenre = {
+	export type TGenre = {
 		id: number;
 		name: string;
 	};
+
+	export type TGenres = {
+		genres: TGenre[]
+	};
+
+	export type TCountry = {
+		iso_3166_1: string,
+		english_name: string,
+		native_name: string
+	}
 
 	type TProductionCompany = {
 		id: number;
@@ -235,6 +245,18 @@ namespace TMDB {
 		first_air_date?: string;
 		page?: number;
 		year?: string;
+	}
+	export type TDiscoverMovieReq = {
+		language?: string;
+		primary_release_year?: number;
+		with_genres?: string;
+		with_origin_country?: string;
+	}
+	export type TDiscoverTVReq = {
+		language?: string;
+		first_air_date_year?: number;
+		with_genres?: string;
+		with_origin_country?: string;
 	}
 }
 

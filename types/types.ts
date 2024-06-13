@@ -7,3 +7,10 @@ export type THTTPMethod =
 	| 'DELETE';
 
 export type TMediaTypes = 'movie' | 'tv';
+
+export type TMediaFilterSearchParams = {
+	year?: string;
+	genreId?: string;
+	country?: string;
+	type?: TMediaTypes;
+}
