@@ -1,13 +1,17 @@
 'use client'
 
 import { useParams, useRouter, useSearchParams } from "next/navigation"
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Icons } from "../icons/icons";
 import { Input } from "../ui/input";
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { TMediaTypes } from "@/types/types";
 import TMDB from "@/types/tmdb-types";
+import MovieTVSwitch from "./movie-tv-switch";
+import SelectGenre from "./select-genre";
+import SelectYear from "./select-year";
+import SelectCountry from "./select-country";
 
 type TProps = {
     movieGenres: TMDB.TGenres,
@@ -26,9 +30,9 @@ export default function Search({movieGenres, tvGenres, countries}: TProps) {
     const [filters, setFilters] = useState({
         type: (searchParamsReadonly.get('type') as TMediaTypes) || 'movie',
         query: pathParams.slug || '',
-        genreId: searchParamsReadonly.get('genreId'),
-        year: searchParamsReadonly.get('year'),
-        country: searchParamsReadonly.get('country'),
+        genreId: searchParamsReadonly.get('genreId') ?? '',
+        year: searchParamsReadonly.get('year') ?? '',
+        country: searchParamsReadonly.get('country') ?? '',
     });
 
     const currentGenres = filters.type === 'movie' ? movieGenres : tvGenres;
@@ -41,10 +45,10 @@ export default function Search({movieGenres, tvGenres, countries}: TProps) {
     searchParams.set('country', filters.country || '');
 
     const removeQuery = () => {
-        setFilters({
-            ...filters,
+        setFilters(prevFilters => ({
+            ...prevFilters,
             query: ''
-        });
+        }));
         const clearedLink = `/szukaj?${searchParams.toString()}`;
         router.push(clearedLink);
     }
@@ -60,6 +64,37 @@ export default function Search({movieGenres, tvGenres, countries}: TProps) {
             country: '',
         })
     }
+
+    const handleGenreIds = useCallback(
+        (genreId: string) => setFilters(prevFilters => ({
+            ...prevFilters,
+            genreId
+        })),
+        []
+    );
+
+    const handleYear = useCallback(
+        (year: string) => setFilters(prevFilters => ({
+            ...prevFilters,
+            year
+        })),
+        []
+    );
+
+    const handleCountry = useCallback(
+        (country: string) => setFilters(prevFilters => ({
+            ...prevFilters,
+            country
+        })),
+        []
+    );
+
+    useEffect(() => {
+        setFilters(prevFilters => ({
+            ...prevFilters,
+            genreId: ''
+        }))
+    }, [filters.type]);
 
     return (
         <div>
@@ -77,14 +112,40 @@ export default function Search({movieGenres, tvGenres, countries}: TProps) {
                     </div>
                 ) : ''
             }
+            <MovieTVSwitch
+                type={filters.type}
+                checkedChange={() => {
+                    setFilters(prevFilters => ({
+                        ...prevFilters,
+                        type: filters.type === 'movie' ? 'tv' : 'movie'
+                    }));
+                }}
+            />
             <Input
                 placeholder="Co dzisiaj oglądamy?"
                 value={decodeURI(filters.query)}
-                onChange={e => setFilters({
-                    ...filters,
+                onChange={e => setFilters(prevFilters => ({
+                    ...prevFilters,
                     query: e.target.value
-                })}
+                }))}
             />
+            <div className="mt-7 grid gap-7 lg:grid-cols-3">
+                <SelectGenre
+                    currentGenres={currentGenres}
+                    defaultGenreId={filters.genreId}
+                    select={handleGenreIds}
+                />
+                <SelectYear
+                    defaultYear={filters.year}
+                    select={handleYear}
+                />
+                <SelectCountry
+                    countries={countries}
+                    defaultCountry={filters.country}
+                    select={handleCountry}
+                    placeholder="Kraj produkcji"
+                />
+            </div>
             <div className="mt-7 flex flex-col justify-center gap-5 text-center lg:flex-row lg:justify-end">
                 <Link
                     href={`/szukaj/${filters.query}?${searchParams.toString()}`}
