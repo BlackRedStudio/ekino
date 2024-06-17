@@ -15,8 +15,6 @@ export default async function HomePage() {
 		TMDBService.getTopRatedTV(),
 	]);
 
-	await new Promise(resolve => setTimeout(resolve, 5000));
-
 	return (
 		<article>
 			<section>

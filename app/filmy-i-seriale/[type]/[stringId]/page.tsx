@@ -21,6 +21,27 @@ export async function generateMetadata({params}: TProps): Promise<Metadata> {
     }
 }
 
+export async function generateStaticParams() {
+    const [topRatedMovies, topRatedTV] = await Promise.all([
+        TMDBService.getTopRatedMovies(),
+        TMDBService.getTopRatedTV(),
+    ]);
+
+    if(!topRatedMovies || !topRatedTV) return [];
+
+    const moviesParams = topRatedMovies.map(({id}) => ({
+        type: 'filmy',
+        stringId: String(id)
+    }))
+
+    const tvParams = topRatedTV.map(({id}) => ({
+        type: 'seriale',
+        stringId: String(id)
+    }))
+
+    return [...moviesParams, ...tvParams];
+}
+
 export default async function MoviesTVPage({params: {
     stringId, type
 }}: TProps) {

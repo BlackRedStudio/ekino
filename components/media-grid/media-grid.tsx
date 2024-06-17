@@ -13,8 +13,6 @@ export default async function MediaGrid({mediaType, mediaList}: TProps) {
 
     let mediaGridData;
 
-    await new Promise(resolve => setTimeout(resolve, 5000));
-
     if(mediaType === 'movie') {
         mediaGridData = mediaList.map(movie => (
             <MediaItem
