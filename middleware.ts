@@ -1,1 +1,1 @@
-import { auth as middleware } from "./server/providers/auth";
+export { auth as middleware } from "./server/providers/auth";
