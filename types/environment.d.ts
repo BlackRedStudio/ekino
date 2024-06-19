@@ -10,6 +10,8 @@ export declare global {
             POSTGRES_HOST: string;
             POSTGRES_PASSWORD: string;
             POSTGRES_DATABASE: string;
+            AUTH_GOOGLE_ID: string;
+            AUTH_GOOGLE_SECRET: string;
         }
     }
 }
