@@ -7,6 +7,7 @@ import { cn } from '@/utils/lib/tailwind';
 
 import Header from '@/components/layout/header';
 import Footer from "@/components/layout/footer";
+import Providers from "@/components/providers/providers";
 
 const poppins = Poppins({
 	subsets: ['latin'],
@@ -40,9 +41,11 @@ export default function RootLayout({
 					'font-poppins min-h-screen bg-foreground antialiased',
 					poppins.variable,
 				)}>
-				<Header />
-				<main>{children}</main>
-				<Footer />
+				<Providers>
+					<Header />
+					<main>{children}</main>
+					<Footer />
+				</Providers>
 			</body>
 		</html>
 	);
