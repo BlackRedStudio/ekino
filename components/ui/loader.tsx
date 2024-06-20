@@ -2,7 +2,7 @@ import { cn } from "@/utils/lib/tailwind"
 import { Icons } from "../icons/icons"
 
 type TProps = {
-    className: string
+    className?: string
 }
 
 export default function Loader({className}: TProps) {
