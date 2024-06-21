@@ -1,4 +1,4 @@
-import { object, string } from 'zod';
+import { inferFlattenedErrors, object, string } from 'zod';
 
 export const userLoginValidator = object({
 	email: string()
@@ -43,3 +43,7 @@ export const userRegistrationValidator = userLoginValidator.extend({
     message: 'Hasła nie pasują do siebie',
     path: ['passwordConfirm']
 });
+
+export type TRegistrationValidatorErrors = inferFlattenedErrors<
+	typeof userRegistrationValidator
+>['fieldErrors'];

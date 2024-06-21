@@ -5,7 +5,8 @@ import Credentials from "next-auth/providers/credentials"
 import {DrizzleAdapter} from '@auth/drizzle-adapter'
 import { db } from "./db";
 import {accountsTable, usersTable, sessionsTable, verificationTokensTable} from '../db/schemas'
-import { eq } from "drizzle-orm";
+import { userLoginValidator } from "@/validators/user-validator"
+import UserRepository from "../db/repositories/user-repository"
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
     adapter: DrizzleAdapter(db, {
@@ -23,16 +24,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 				email: {},
 				password: {}
 			},
-			authorize: async ({email, password}) => {
+			authorize: async (credentials) => {
 				try {
 
-					if(typeof email !== 'string' || typeof password !== 'string') {
-						throw new Error('Złe dane logowania');
-					}
-
-					const user = await db.query.usersTable.findFirst({
-						where: eq(usersTable.email, email)
+					const {email, password} = userLoginValidator.parse({
+						email: credentials.email,
+						password: credentials.password,
 					});
+
+					const user = await UserRepository.firstByEmail(email);
 
 					if(!user || !user.password) {
 						throw new Error('Złe dane logowania');

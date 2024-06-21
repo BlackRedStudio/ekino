@@ -8,6 +8,7 @@ import SubmitButton from "../ui/submit-button"
 import { useEffect } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
 import { useToast } from "@/utils/hooks/use-toast"
+import Link from "next/link"
 
 export default function LoginForm() {
 
@@ -65,6 +66,12 @@ export default function LoginForm() {
             <Button variant={'outline'} className="w-full" onClick={handleGoogleSignIn}>
                 Zaloguj się z Google
             </Button>
+            <div className="mt-4 text-center text-sm text-white">
+                Nie masz jeszcze konta?{' '}
+                <Link href="/rejestracja" className="underline">
+                    Zarejestruj się
+                </Link>
+            </div>
         </div>
     )
 }

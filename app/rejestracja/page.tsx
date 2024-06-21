@@ -1,25 +1,23 @@
-'use client'
 
-import FormField from "@/components/form-fields"
-import SubmitButton from "@/components/ui/submit-button"
-import { test } from "@/server/actions/user-actions"
+import RegisterForm from "@/components/forms/register-form"
+import Image from "next/image"
 
 
 export default function RegisterPage() {
     return (
-        <article>
-            <section>
-                <form action={test}>
-                    <FormField
-                       label="Test"
-                       name="test"
-                       type="text"
-                       placeholder="test akcji serverowej"
-                       required
-                   />
-                   <SubmitButton text="Wyślij" />
-                </form>
-            </section>
-        </article>
-    )
+        <div className="w-full lg:grid lg:min-h-[600px] lg:grid-cols-2 xl:min-h-[800px] mb-12">
+            <div className="hidden bg-muted lg:block">
+                <Image
+                    src="/ekino_cover.jpg"
+                    alt=""
+                    width={960}
+                    height={1080}
+                    className="h-full w-full object-cover"
+                />
+            </div>
+            <div className="flex items-center justify-center py-12">
+                <RegisterForm />
+            </div>
+        </div>
+)
 }
