@@ -12,6 +12,7 @@ export declare global {
             POSTGRES_DATABASE: string;
             AUTH_GOOGLE_ID: string;
             AUTH_GOOGLE_SECRET: string;
+            AUTH_TRUST_HOST: string;
         }
     }
 }
