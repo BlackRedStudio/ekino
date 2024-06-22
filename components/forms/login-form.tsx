@@ -1,7 +1,7 @@
 'use client'
 
 import { signIn } from "next-auth/react"
-import FormField from "../form-fields"
+import FormField from "../form-field"
 import { Button } from "../ui/button"
 import Heading from "../ui/heading"
 import SubmitButton from "../ui/submit-button"

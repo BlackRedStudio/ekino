@@ -17,7 +17,9 @@ export default function Menu() {
 	const [open, setOpen] = useState(false);
 	const path = usePathname();
 	const selectedLayoutSegment = useSelectedLayoutSegment();
-	const { status } = useSession();
+	const { status, data } = useSession();
+
+	console.log(data);
 
 	const menuItems = navConfig.map(
 		({ icon, label, slug, layoutSegment, visibility, type }) => {

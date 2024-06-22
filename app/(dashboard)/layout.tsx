@@ -10,7 +10,7 @@ type TProps = {
 
 export default function DashboardLayout({children}: TProps) {
     return (
-        <div className="bg-red-500 h-[100vh]">
+        <div>
             {children}
         </div>
     )

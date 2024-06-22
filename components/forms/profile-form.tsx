@@ -1,23 +1,27 @@
 'use client'
 
-import { userActions } from "@/server/actions"
-import FormField from "../form-field"
-import Heading from "../ui/heading"
-import SubmitButton from "../ui/submit-button"
-import { useToast } from "@/utils/hooks/use-toast"
-import Link from "next/link"
-import { useState } from "react"
-import { TRegistrationValidatorErrors } from "@/validators/user-validator"
-import { signIn } from "next-auth/react"
+import { TUser } from "@/server/db/schemas"
+import FormField from "../form-field";
+import { TRegistrationValidatorErrors } from "@/validators/user-validator";
+import { useToast } from "@/utils/hooks/use-toast";
+import SubmitButton from "../ui/submit-button";
+import Heading from "../ui/heading";
+import { useState } from "react";
+import { userActions } from "@/server/actions";
+import { useSession } from "next-auth/react";
 
-export default function RegisterForm() {
+type TProps = {
+    user: TUser;
+}
 
+export default function ProfileForm({user}: TProps) {
     const [formErrors, setFormErrors] = useState<TRegistrationValidatorErrors>({});
     const {toast} = useToast();
+    const {update} = useSession();
 
-    const handleRegistration = async (formData: FormData) => {
+    const handleUpdateProfile = async (formData: FormData) => {
 
-        const res = await userActions.registerUser(formData);
+        const res = await userActions.updateProfile(formData);
 
         if(!res.success && res.errors) {
             setFormErrors(res.errors);
@@ -29,25 +33,26 @@ export default function RegisterForm() {
             variant: res.success ? 'success' : 'destructive'
         });
 
-        if(res.success === true) {
-            await signIn('credentials', {
-                email: formData.get('email'),
-                password: formData.get('password')
+        if(res.success) {
+            await update({
+                name: res.data.name,
+                email: res.data.email
             });
         }
 
     }
 
     return (
-        <div className="mx-auto grid w-[350px] gap-6">
-            <Heading tag="h1" variant="h2" className="text-center">Rejestracja</Heading>
-            <form action={handleRegistration} className="space-y-1">
+        <form action={handleUpdateProfile} className="mx-auto grid lg:w-[750px] gap-6">
+            <Heading tag="h3" variant="h3" className="pb-0">Dane użytkownika:</Heading>
+            <div className="space-y-2">
                 <FormField
                     label="Nazwa użytkownika"
                     name="name"
                     placeholder="Jan Kowalski"
                     errors={formErrors.name}
-                    required
+                    defaultValue={user.name || ''}
+                    variant="horizontal"
                 />
                 <FormField
                     label="Email"
@@ -55,7 +60,8 @@ export default function RegisterForm() {
                     type="email"
                     placeholder="mail@gmail.com"
                     errors={formErrors.email}
-                    required
+                    defaultValue={user.email || ''}
+                    variant="horizontal"
                 />
                 <FormField
                     label="Hasło"
@@ -63,6 +69,7 @@ export default function RegisterForm() {
                     type="password"
                     placeholder="*********"
                     errors={formErrors.password}
+                    variant="horizontal"
                     required
                 />
                 <FormField
@@ -71,16 +78,11 @@ export default function RegisterForm() {
                     type="password"
                     placeholder="*********"
                     errors={formErrors.passwordConfirm}
+                    variant="horizontal"
                     required
                 />
-                <SubmitButton text="Zarejestruj się" />
-            </form>
-            <div className="mt-4 text-center text-sm text-white">
-                Masz już konto?{' '}
-                <Link href="/logowanie" className="underline">
-                    Zaloguj się
-                </Link>
+                <SubmitButton text="Zaktualizuj profil" />
             </div>
-        </div>
+        </form>
     )
 }

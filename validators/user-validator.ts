@@ -1,4 +1,4 @@
-import { inferFlattenedErrors, object, string } from 'zod';
+import { inferFlattenedErrors, object, string, z } from 'zod';
 
 export const userLoginValidator = object({
 	email: string()
@@ -47,3 +47,5 @@ export const userRegistrationValidator = userLoginValidator.extend({
 export type TRegistrationValidatorErrors = inferFlattenedErrors<
 	typeof userRegistrationValidator
 >['fieldErrors'];
+
+export type TUserRegistrationValidator = z.infer<typeof userRegistrationValidator>

@@ -60,6 +60,28 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
 			console.log(msg);
 		},
 	},
+	callbacks: {
+		async jwt({token, trigger, session, user}) {
+
+			if(trigger === 'update' && session.email) {
+				token.email = session.email;
+				token.name = session.name;
+			}
+
+			if(user && user.id) {
+				token.id = user.id;
+			}
+
+			return token;
+		},
+		async session({session, token}) {
+			if(session.user) {
+				session.user.id = token.id;
+			}
+
+			return session;
+		}
+	},
 	pages: {
 		signIn: '/logowanie',
 		signOut: '/logowanie',
