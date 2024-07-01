@@ -1,4 +1,4 @@
-import { BookOpenIcon, ChevronLeftIcon, ChevronRightIcon, KeyIcon, LoaderCircleIcon, LogOutIcon, MenuIcon, XIcon } from 'lucide-react';
+import { BookOpenIcon, ChevronLeftIcon, ChevronRightIcon, KeyIcon, LoaderCircleIcon, LogOutIcon, MenuIcon, StarIcon, XIcon } from 'lucide-react';
 
 import Camera from './camera';
 import Home from './home';
@@ -19,5 +19,6 @@ export const Icons = {
 	loaderCircle: LoaderCircleIcon,
 	key: KeyIcon,
 	logout: LogOutIcon,
-	person: Person
+	person: Person,
+	star: StarIcon
 };
