@@ -15,6 +15,13 @@
       "when": 1718878375010,
       "tag": "0001_normal_scrambler",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1719856082209,
+      "tag": "0002_free_unus",
+      "breakpoints": true
     }
   ]
 }
