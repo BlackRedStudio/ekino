@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 import Image from 'next/image';
 import { notFound, redirect } from 'next/navigation';
+import { commentActions } from '@/server/actions';
 import TMDBService from '@/server/services/tmdb-service';
 import { linkToType, typeToLabel } from '@/utils/translations';
 
@@ -57,13 +58,14 @@ export default async function MoviesTVPage({
 	const typeLabel = typeToLabel(mediaType);
 	const id = parseInt(stringId);
 
-	const [media, images] = await Promise.all([
+	const [media, images, comments] = await Promise.all([
 		mediaType === 'movie'
 			? TMDBService.getMovieDetails(id)
 			: TMDBService.getTVDetails(id),
 		mediaType === 'movie'
 			? TMDBService.getMovieImages(id)
 			: TMDBService.getTVImages(id),
+		commentActions.getComments(id, mediaType),
 	]);
 
 	if (!media) notFound();
@@ -117,9 +119,24 @@ export default async function MoviesTVPage({
 						alt="Kobieta dająca okejkę"
 						className="mx-auto"
 					/>
-					<UsersRating variant="large" ratingCount={0} rating={7} />
+					<UsersRating
+						variant="large"
+						ratingCount={
+							comments.success ? comments.data.length : 0
+						}
+						rating={
+							comments.success
+								? comments.data.reduce(
+										(acc, curr) => acc + curr.rating,
+										0,
+									) / comments.data.length
+								: 0
+						}
+					/>
 				</div>
-				<Comments comments={''} />
+				<Comments
+					comments={comments.success ? comments.data : undefined}
+				/>
 			</Section>
 		</article>
 	);

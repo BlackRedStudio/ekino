@@ -9,7 +9,7 @@ import {
 
 import { TMediaTypes } from '@/types/types';
 
-import { usersTable } from './user-schema';
+import { TUserInsert, usersTable } from './user-schema';
 
 export const commentsTable = pgTable('comments', {
 	id: text('id')
@@ -29,11 +29,14 @@ export const commentsTable = pgTable('comments', {
 });
 
 export const commentsRelations = relations(commentsTable, ({ one }) => ({
-    user: one(usersTable, {
-        fields: [commentsTable.userId],
-        references: [usersTable.id],
-    })
+	user: one(usersTable, {
+		fields: [commentsTable.userId],
+		references: [usersTable.id],
+	}),
 }));
 
 export type TComment = typeof commentsTable.$inferSelect;
 export type TCommentInsert = typeof commentsTable.$inferInsert;
+export type TCommentWithUser = TComment & {
+	user: TUserInsert;
+};

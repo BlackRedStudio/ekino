@@ -1,3 +1,5 @@
+'use server'
+
 import { TCommentValidatorErrors, commentValidator } from "@/validators/comment-validator";
 import { TCommentInsert } from "../db/schemas";
 import { EkinoError, SessionError, getError } from "../helpers/error-helper";

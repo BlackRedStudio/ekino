@@ -7,9 +7,10 @@ type TProps = {
     name?: string | null;
     image?: string | null;
     className?: string;
+    isHeadingVisible?: boolean;
 }
 
-export default function AvatarBox({name, image, className}: TProps) {
+export default function AvatarBox({name, image, className, isHeadingVisible = true}: TProps) {
 
     const nameInitials = name ? getNameInitials(name) : 'EK';
 
@@ -21,9 +22,9 @@ export default function AvatarBox({name, image, className}: TProps) {
                     {!image ? nameInitials : null}
                 </AvatarFallback>
             </Avatar>
-            <Heading variant="h2" tag="h1" className="text-white">
+            {isHeadingVisible ? <Heading variant="h2" tag="h1" className="text-white">
                 {name || ''}
-            </Heading>
+            </Heading> : ''}
         </div>
     )
 }
